@@ -17,6 +17,10 @@ class Api::V1::CustomersController < ApplicationController
     respond_with Customer.where(customer_params).all
   end
 
+  # def random
+  # 
+  # end
+
   private
 
     def customer_params
