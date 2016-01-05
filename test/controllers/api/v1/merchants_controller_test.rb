@@ -100,13 +100,43 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_kind_of Hash, json_response
   end
 
-  # test "#items responds to json" do
-  #   get :items, format: :json
-  #   assert_response :success
-  # end
-  #
-  # test "#items return all items associated with merchant" do
-  #   get "#{Merchant.first.id}/items", format: :json
-  #   assert_equal Merchant.first.items.count, json_response.count
-  # end
+  test "#merchant items responds to json" do
+    get :items, format: :json, id: Merchant.first.id
+    assert_response :success
+  end
+
+  test "#items returns all items associated with merchant" do
+    create_merchant_items
+
+    get :items, format: :json, id: Merchant.first.id
+    assert_equal 1, json_response.count
+  end
+
+  test "#items returns correct data from merchant items" do
+    create_merchant_items
+
+    get :items, format: :json, id: Merchant.first.id
+    item = Merchant.first.items.first
+    assert_equal item.name, json_response.first["name"]
+  end
+
+  test "#merchant invoices responds to json" do
+    get :invoices, format: :json, id: Merchant.first.id
+    assert_response :success
+  end
+
+  test "#invoices returns all invoices associated with merchant" do
+    create_merchant_invoices
+
+    get :invoices, format: :json, id: Merchant.first.id
+    assert_equal 1, json_response.count
+  end
+
+  test "#invoices returns correct data from merchant invoices" do
+    create_merchant_invoices
+
+    get :invoices, format: :json, id: Merchant.first.id
+    invoice = Merchant.first.invoices.first
+    assert_equal invoice.status, json_response.first["status"]
+  end
 end

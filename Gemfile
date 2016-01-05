@@ -40,6 +40,7 @@ group :development, :test do
   gem 'minitest-reporters'
   gem 'faker'
   gem 'factory_girl_rails', '~> 4.0'
+  gem "pry"
 end
 
 group :development do

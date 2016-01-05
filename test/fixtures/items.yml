@@ -12,6 +12,6 @@ two:
   name: MyString
   description: MyString
   unit_price: 1
-  merchant_id: 
+  merchant_id:
   created_at: 2016-01-04 16:33:53
   updated_at: 2016-01-04 16:33:53
