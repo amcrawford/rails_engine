@@ -99,4 +99,14 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     get :random, format: :json
     assert_kind_of Hash, json_response
   end
+
+  # test "#items responds to json" do
+  #   get :items, format: :json
+  #   assert_response :success
+  # end
+  #
+  # test "#items return all items associated with merchant" do
+  #   get "#{Merchant.first.id}/items", format: :json
+  #   assert_equal Merchant.first.items.count, json_response.count
+  # end
 end
