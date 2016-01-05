@@ -17,9 +17,9 @@ class Api::V1::CustomersController < ApplicationController
     respond_with Customer.where(customer_params).all
   end
 
-  # def random
-  # 
-  # end
+  def random
+    respond_with Customer.find(rand(1..Customer.count))
+  end
 
   private
 
