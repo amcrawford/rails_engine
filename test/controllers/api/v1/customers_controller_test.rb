@@ -95,4 +95,8 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "#random returns one record" do
+    get :random, format: :json
+    assert_kind_of Hash, json_response
+  end
 end
