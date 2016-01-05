@@ -18,7 +18,7 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def random
-    respond_with Transaction.find(rand(1..Transaction.count))
+    respond_with Transaction.order("RANDOM()").first
   end
 
   private

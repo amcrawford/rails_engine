@@ -18,7 +18,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def random
-    respond_with Merchant.find(rand(1..Merchant.count))
+    respond_with Merchant.order("RANDOM()").first
   end
 
   private

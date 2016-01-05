@@ -18,7 +18,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def random
-    respond_with Item.find(rand(1..Item.count))
+    respond_with Item.order("RANDOM()").first
   end
 
   private

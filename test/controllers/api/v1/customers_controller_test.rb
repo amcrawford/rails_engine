@@ -89,4 +89,10 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     get :find_all, format: :json, first_name: "Not in there."
     assert_equal 0, json_response.count
   end
+
+  test "#random responds to json" do
+    get :random, format: :json
+    assert_response :success
+  end
+
 end

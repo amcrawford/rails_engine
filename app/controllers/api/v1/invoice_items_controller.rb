@@ -18,7 +18,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def random
-    respond_with InvoiceItem.find(rand(1..InvoiceItem.count))
+    respond_with InvoiceItem.order("RANDOM()").first
   end
 
   private

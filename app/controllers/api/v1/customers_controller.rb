@@ -18,7 +18,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def random
-    respond_with Customer.find(rand(1..Customer.count))
+    respond_with Customer.order("RANDOM()").first
   end
 
   private
