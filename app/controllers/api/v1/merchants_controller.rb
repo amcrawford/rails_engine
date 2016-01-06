@@ -29,8 +29,8 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.find(params[:id]).invoices
   end
 
-  def method_name
-
+  def revenue
+    respond_with revenue: Merchant.find(params[:id]).find_revenue
   end
 
   private

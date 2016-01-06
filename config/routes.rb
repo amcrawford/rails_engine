@@ -66,6 +66,7 @@ Rails.application.routes.draw do
         member do
           get :items
           get :invoices
+          get :revenue
         end
       end
 
