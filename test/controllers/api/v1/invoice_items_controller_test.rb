@@ -60,11 +60,6 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
     assert_equal InvoiceItem.first.quantity, json_response["quantity"]
   end
 
-  test "#find returns the correct invoice item using unit price" do
-    get :find, format: :json, unit_price: InvoiceItem.first.unit_price
-    assert_equal InvoiceItem.first.unit_price, json_response["unit_price"]
-  end
-
   test "#find returns the null if invoice_id is not in database" do
     get :find, format: :json, invoice_id: "#{Invoice.last.id + 1}"
     assert_equal "null", response.body

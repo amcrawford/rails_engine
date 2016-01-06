@@ -94,4 +94,9 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     get :random, format: :json
     assert_kind_of Hash, json_response
   end
+
+  test "#merchant items responds to json" do
+    get :items, format: :json, id: Merchant.first.id
+    assert_response :success
+  end
 end
