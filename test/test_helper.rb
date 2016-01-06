@@ -36,6 +36,16 @@ class ActiveSupport::TestCase
     invoice = Customer.first.invoices.first
     invoice.transactions.create(credit_card_number: "333", created_at: "2016-01-06T22:31:30.372Z", result: "success")
   end
+
+  def create_invoice_transactions
+    invoice = Invoice.first
+    invoice.transactions.create(credit_card_number: "333", created_at: "2016-01-06T22:31:30.372Z", result: "success")
+  end
+
+  def create_invoice_items
+    invoice = Invoice.first
+    invoice.invoice_items.create(item_id: Item.first.id, quantity: 3)
+  end
 end
 
 class ActionController::TestCase

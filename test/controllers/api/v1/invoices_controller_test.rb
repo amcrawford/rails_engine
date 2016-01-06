@@ -95,8 +95,28 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     assert_kind_of Hash, json_response
   end
 
-  test "#merchant items responds to json" do
-    get :items, format: :json, id: Merchant.first.id
-    assert_response :success
+  test "#transactions returns correct records" do
+    create_invoice_transactions
+
+    get :transactions, format: :json, id: Invoice.first.id
+    transaction = Invoice.first.transactions.first
+    assert_equal transaction.credit_card_number, json_response.first["credit_card_number"]
+    assert_equal transaction.created_at.to_json, json_response.first["created_at"].to_json
+  end
+
+  test "#invoice_items returns correct records" do
+    create_invoice_items
+
+    get :invoice_items, format: :json, id: Invoice.first.id
+    invoice_item = Invoice.first.invoice_items.first
+    assert_equal invoice_item.quantity, json_response.first["quantity"]
+  end
+
+  test "#items returns correct records" do
+    create_invoice_items
+
+    get :items, format: :json, id: Invoice.first.id
+    item = Item.first
+    assert_equal item.name, json_response.first["name"]
   end
 end

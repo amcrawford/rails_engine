@@ -94,4 +94,20 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
     get :random, format: :json
     assert_kind_of Hash, json_response
   end
+
+  test "#invoice returns correct records" do
+    invoice_item = InvoiceItem.first
+    invoice_item.update(invoice_id: Invoice.first.id)
+
+    get :invoice, format: :json, id: InvoiceItem.first.id
+    assert_equal invoice_item.invoice.id, json_response["id"]
+  end
+
+  test "#item returns correct records" do
+    invoice_item = InvoiceItem.first
+    invoice_item.update(item_id: Item.first.id)
+
+    get :item, format: :json, id: InvoiceItem.first.id
+    assert_equal invoice_item.item.id, json_response["id"]
+  end
 end
