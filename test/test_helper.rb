@@ -26,6 +26,16 @@ class ActiveSupport::TestCase
     merchant = Merchant.first
     merchant.invoices.create(customer_id: Customer.first.id, status: "Completed")
   end
+
+  def create_customer_invoices
+    customer = Customer.first
+    customer.invoices.create(merchant_id: Merchant.first.id, status: "Completed")
+  end
+
+  def create_customer_transactions
+    invoice = Customer.first.invoices.first
+    invoice.transactions.create(credit_card_number: "333", created_at: "2016-01-06T22:31:30.372Z", result: "success")
+  end
 end
 
 class ActionController::TestCase

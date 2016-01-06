@@ -99,4 +99,32 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     get :random, format: :json
     assert_kind_of Hash, json_response
   end
+
+  test "#invoices returns correct records" do
+    create_customer_invoices
+
+    get :invoices, format: :json, id: Customer.first.id
+    invoice = Customer.first.invoices.first
+    assert_equal invoice.status, json_response.first["status"]
+    assert_equal invoice.created_at.to_json, json_response.first["created_at"].to_json
+  end
+
+  test "#transactions returns correct records" do
+    create_customer_invoices
+    create_customer_transactions
+
+    get :transactions, format: :json, id: Customer.first.id
+    transaction = Customer.first.invoices.first.transactions.first
+    assert_equal transaction.credit_card_number, json_response.first["credit_card_number"]
+    assert_equal transaction.created_at.to_json, json_response.first["created_at"].to_json
+  end
+
+  test "#favorite merchants returns correct records" do
+    create_customer_invoices
+    create_customer_transactions
+
+    get :favorite_merchant, format: :json, id: Customer.first.id
+    merchant = Customer.first.invoices.first.merchant
+    assert_equal merchant.name, json_response["name"]
+  end
 end
