@@ -119,4 +119,20 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     item = Item.first
     assert_equal item.name, json_response.first["name"]
   end
+
+  test "#customer returns correct records" do
+    create_customer_invoices
+    invoice = Customer.first.invoices.first
+
+    get :customer, format: :json, id: invoice.id
+    assert_equal Customer.first.first_name, json_response["first_name"]
+  end
+
+  test "#merchant returns correct records" do
+    create_merchant_invoices
+    invoice = Merchant.first.invoices.first
+
+    get :merchant, format: :json, id: invoice.id
+    assert_equal Merchant.first.name, json_response["name"]
+  end
 end
