@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         member do
           get :invoices
           get :transactions
+          get :favorite_merchant
         end
       end
 
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
           get :find_all
           get :random
           get :most_revenue
+          get :revenue, to: "merchants#total_revenue"
         end
 
         member do
