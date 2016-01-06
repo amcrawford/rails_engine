@@ -7,5 +7,6 @@ class Invoice < ActiveRecord::Base
   has_many :items, through: :invoice_items
 
   scope :successful, -> { joins(:transactions).where(transactions: {result: "success"}) }
+  scope :failed, -> { joins(:transactions).where(transactions: {result: "failed"}) }
 
 end
