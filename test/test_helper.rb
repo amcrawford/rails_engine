@@ -32,6 +32,11 @@ class ActiveSupport::TestCase
     customer.invoices.create(merchant_id: Merchant.first.id, status: "Completed")
   end
 
+  def create_customer_invoice_items
+    create_customer_invoices
+    Customer.first.invoices.first.invoice_items.create(item_id: Item.first.id, quantity: 3)
+  end
+
   def create_customer_transactions
     invoice = Customer.first.invoices.first
     invoice.transactions.create(credit_card_number: "333", created_at: "2016-01-06T22:31:30.372Z", result: "success")
@@ -51,15 +56,3 @@ end
 class ActionController::TestCase
 
 end
-
-# DatabaseCleaner.strategy = :transaction
-#
-# class Minitest::Spec
-#   def setup
-#     DatabaseCleaner.start
-#   end
-#
-#   def teardown
-#     DatabaseCleaner.clean
-#   end
-# end

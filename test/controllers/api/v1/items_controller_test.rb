@@ -100,4 +100,12 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     get :random, format: :json
     assert_kind_of Hash, json_response
   end
+
+  test "#invoice_items returns correct records" do
+    create_customer_invoice_items
+
+    get :invoice_items, format: :json, id: Item.first.id
+    invoice_item = Item.first.invoices.first.invoice_items.first
+    assert_equal invoice_item.quantity, json_response.first["quantity"]
+  end
 end
