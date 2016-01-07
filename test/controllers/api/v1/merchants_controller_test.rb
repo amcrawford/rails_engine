@@ -129,7 +129,7 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     create_merchant_invoices
 
     get :invoices, format: :json, id: Merchant.first.id
-    assert_equal 1, json_response.count
+    assert_equal 2, json_response.count
   end
 
   test "#invoices returns correct data from merchant invoices" do

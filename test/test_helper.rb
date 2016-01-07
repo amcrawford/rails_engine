@@ -24,17 +24,18 @@ class ActiveSupport::TestCase
 
   def create_merchant_invoices
     merchant = Merchant.first
-    merchant.invoices.create(customer_id: Customer.first.id, status: "Completed")
+    merchant.invoices.create(customer_id: Customer.first.id, status: "Completed", created_at: "2016-01-06T22:31:30.372Z")
+    merchant.invoices.create(customer_id: Customer.first.id, status: "Not Completed", created_at: "2015-01-06T22:31:30.372Z")
   end
 
   def create_customer_invoices
     customer = Customer.first
-    customer.invoices.create(merchant_id: Merchant.first.id, status: "Completed")
+    customer.invoices.create(merchant_id: Merchant.first.id, status: "Completed", created_at: "2016-01-06T22:31:30.372Z")
   end
 
   def create_customer_invoice_items
     create_customer_invoices
-    Customer.first.invoices.first.invoice_items.create(item_id: Item.first.id, quantity: 3)
+    Customer.first.invoices.first.invoice_items.create(item_id: Item.first.id, quantity: 3, unit_price: 200)
   end
 
   def create_customer_transactions
