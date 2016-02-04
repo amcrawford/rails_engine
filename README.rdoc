@@ -1,3 +1,5 @@
 == README
 
-Built basic API for remote consumption.
+Use Rails and ActiveRecord to build a JSON API which exposes data schema from previous projects.
+
+STACK: Rails, Ruby, PostgreSQL
